@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <header class="page-header">
+    <h1>Order #<%= @order.id %></h1>
+  </header>
+
+  <% @order.line_items.each do |arr| %>
+
+  <%= image_tag Product.find(arr.product_id).image %>
+
+  <h3><%= Product.find(arr.product_id).name %></h3>
+  <h4>Description</h4>
+  <p>
+    <%= Product.find(arr.product_id).description %>
+  </p>
+
+  <p>Quantity <%= arr.quantity %></p>
+
+  <p>Total: <%= humanized_money_with_symbol Product.find(arr.product_id).price_cents/100.0 * arr.quantity%></p>
+
+  <p>Order Email: <%= @order.email %></p>
+
+  <div class="order-summary jumbotron">
+    <h4>Thank you for your order!</h4>
+  </div>
+
+  <% end %>
+  </body>
+</html>
